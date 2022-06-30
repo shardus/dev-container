@@ -2,6 +2,11 @@
 
 Development container with tooling for Shardus's Node.js and Rust projects.
 
+Container URL:
+```
+registry.gitlab.com/shardus/dev-container
+```
+
 # Usage
 
 From: https://code.visualstudio.com/docs/remote/devcontainer-cli#_example-of-building-and-publishing-an-image
