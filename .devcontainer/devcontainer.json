@@ -1,0 +1,50 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.238.0/containers/typescript-node
+{
+  "name": "Node.js & TypeScript",
+  "build": {
+    "dockerfile": "Dockerfile",
+    // Update 'VARIANT' to pick a Node version: 18, 16, 14.
+    // Append -bullseye or -buster to pin to an OS version.
+    // Use -bullseye variants on local on arm64/Apple Silicon.
+    "args": {
+      "VARIANT": "16"
+    }
+  },
+
+  // Configure tool-specific properties.
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": ["dbaeumer.vscode-eslint"]
+    }
+  },
+
+  // [AS] Remount workspace with ":Z" to get around SELinux issues on Fedora
+  // [AS] Add "--userns=keep-id" to make build pass while using "remoteUser": "node"
+  // from: https://code.visualstudio.com/remote/advancedcontainers/docker-options#_podman
+  "workspaceMount": "",
+  "runArgs": ["--userns=keep-id", "--volume=${localWorkspaceFolder}:/workspaces/${localWorkspaceFolderBasename}:Z"],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  // "postCreateCommand": "yarn install",
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+
+  // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "node",
+
+  // [AS] Add "containerEnv" opt to make build pass while using "remoteUser": "node"
+  // from: https://code.visualstudio.com/remote/advancedcontainers/docker-options#_podman
+  "containerEnv": {
+    "HOME": "/home/node"
+  }
+
+  // [AS] Comment out features section due to this bug: https://github.com/microsoft/vscode-remote-release/issues/6851#issuecomment-1163303463
+  // "features": {
+  //   "python": "latest",
+  //   "rust": "latest"
+  // }
+}
