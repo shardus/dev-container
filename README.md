@@ -1,13 +1,32 @@
 # dev-container
 
-Development container with tooling for Shardus's Node.js and Rust projects.
+Development container with pre-installed tooling (Node.js, Rust, Python, etc.) for working on Shardus projects.
 
-Container URL:
-```
-registry.gitlab.com/shardus/dev-container
-```
+## Use
 
-# Usage
+1. Install the Remote Development extension for VSCode: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack
+
+2. Open any shardus project (shardeum/server is a good one)
+
+3. Create a .devcontainer folder in the project root with a devcontainer.json file containing:
+{
+  "image": "registry.gitlab.com/shardus/dev-container",
+  "workspaceMount": "",
+  "runArgs": ["--userns=keep-id", "--volume=${localWorkspaceFolder}:/workspaces/${localWorkspaceFolderBasename}:Z"],
+  "remoteUser": "node",
+  "containerEnv": {
+    "HOME": "/home/node"
+  }
+}
+
+
+4. Hit Ctrl +Shift+p, type Remote-Containers: Rebuild and Reopen in Container , and hit Enter
+
+This should start pulling the dev container from Gitlab, and once it's setup, give you a terminal into the container with node and npm in the path
+
+5. Run npm install and try out containerized development 🙂
+
+## Build
 
 From: https://code.visualstudio.com/docs/remote/devcontainer-cli#_example-of-building-and-publishing-an-image
 
