@@ -10,14 +10,29 @@ A development container with pre-installed tooling (Node.js, Rust, Python, etc.)
 
 3. Create a `.devcontainer` folder in the project root with a `devcontainer.json` file containing:
 
-    ```
+    ```json
     {
       "image": "registry.gitlab.com/shardus/dev-container",
       "workspaceMount": "",
-      "runArgs": ["--userns=keep-id", "--volume=${localWorkspaceFolder}:/workspaces/${localWorkspaceFolderBasename}:Z"],
+      "runArgs": [
+        // "--userns=keep-id", // Need this if using Podman instead of Docker
+        "--volume=${localWorkspaceFolder}:/workspaces/${localWorkspaceFolderBasename}:Z"
+      ],
       "remoteUser": "node",
       "containerEnv": {
         "HOME": "/home/node"
+      },
+      // Configure tool-specific properties.
+      "customizations": {
+        // Configure properties specific to VS Code.
+        "vscode": {
+          // Add the IDs of extensions you want installed when the container is created.
+          "extensions": [
+            "mhutchie.git-graph",
+            "dbaeumer.vscode-eslint",
+            "esbenp.prettier-vscode"
+          ]
+        }
       }
     }
     ```
@@ -35,7 +50,7 @@ From: https://code.visualstudio.com/docs/remote/devcontainer-cli#_example-of-bui
 
 2. Create a dev container configuration for each image you want to pre-build, customizing as you wish (including dev container features). For example, consider this `devcontainer.json` file:
 
-    ```
+    ```json
     {
       "build": {
         "dockerfile": "Dockerfile"
@@ -48,7 +63,7 @@ From: https://code.visualstudio.com/docs/remote/devcontainer-cli#_example-of-bui
 
 3. Use the `devcontainer build` command to build the image. See documentation for your image registry (like the Azure Container Registry, GitHub Container Registry, or Docker Hub) for information on image naming and additional steps like authentication.
 
-    ```
+    ```bash
     devcontainer build \
         --image-name ghcr.io/your-org/your-repo/your-image-name \
         change-me-to-repository-folder-with-dot-devcontainer
@@ -56,13 +71,13 @@ From: https://code.visualstudio.com/docs/remote/devcontainer-cli#_example-of-bui
 
 4. Next push the image to your registry.
 
-    ```
+    ```bash
     docker push ghcr.io/your-org/your-image-name
     ```
 
 5. Finally, for each project or repository that will use your image, craft a simplified `devcontainer.json` file that either uses the image property or references it in a Docker Compose file. Include any dev container features you added in your pre-build configuration in step 2. For example:
 
-    ```
+    ```json
     {
       "image": "ghcr.io/your-org/your-image-name",
       "features": {
