@@ -42,6 +42,16 @@ A development container with pre-installed tooling (Node.js, Rust, Python, etc.)
 
 5. Run `npm install` and witness the power of containerized development 🙂.
 
+*Note for QEMU users (this includes M1 and M2 Macs):*
+
+  If you run into problems running `npm install` you may need to perform these additional steps:
+  1. Create `.cargo/config.toml` file in the root directory of your project if it does not already exist
+  2. Add the following to `.cargo/config.toml`
+  ```[net]
+     git-fetch-with-cli = true   # use the git executable for git operations
+  ```
+  3. Repeat steps 4 and 5.
+
 ## Build
 
 From: https://code.visualstudio.com/docs/remote/devcontainer-cli#_example-of-building-and-publishing-an-image
