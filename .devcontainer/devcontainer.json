@@ -20,7 +20,9 @@
       "extensions": [
         "mhutchie.git-graph",
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "eamodio.gitlens",
+        "gitlab.gitlab-workflow"
       ]
     }
   },
