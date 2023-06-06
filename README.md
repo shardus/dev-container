@@ -38,7 +38,7 @@ A development container with pre-installed tooling (Node.js, Rust, Python, etc.)
     ```
 
 
-4. Open the Command Palette with `Ctrl` + `Shift` + `p` and select the `Remote-Containers: Rebuild and Reopen in Container` option. This should start pulling the dev container from Gitlab. Once it's ready, it will open a terminal into the container with `node` and `npm` in the path.
+4. Open the Command Palette with `Ctrl` + `Shift` + `p` and select the `Dev-Containers: Rebuild and Reopen in Container` option. This should start pulling the dev container from Gitlab. Once it's ready, it will open a terminal into the container with `node` and `npm` in the path.
 
 5. Run `npm install` and witness the power of containerized development 🙂.
 
