@@ -11,7 +11,7 @@ RUN su node -c "curl https://sh.rustup.rs -sSf | bash -s -- -y"
 ENV PATH="/node/.cargo/bin:${PATH}"
 
 # [Optional] Uncomment if you want to install an additional version of node using nvm
-ARG EXTRA_NODE_VERSION=18.16.0
+ARG EXTRA_NODE_VERSION=18.16.1
 RUN su node -c "source /usr/local/share/nvm/nvm.sh && nvm install ${EXTRA_NODE_VERSION}"
 
 # [Optional] Uncomment if you want to install more global node packages
